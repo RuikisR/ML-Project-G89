@@ -21,6 +21,9 @@ freeze: venv
 list: venv
 	source .venv/bin/activate; pip list
 
+pretty: venv
+	black $(project_name)
+
 data:
 	mkdir -p data
 

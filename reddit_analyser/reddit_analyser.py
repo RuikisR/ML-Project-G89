@@ -1,9 +1,9 @@
-import numpy as np
-from sklearn.linear_model import LogisticRegression
+import scraper
 
 
 def main():
-    print("If this prints then you did good!")
+    reddit = scraper.create_instance()
+    [print(line) for line in scraper.pull_data(reddit)]
 
 
 if __name__ == '__main__':

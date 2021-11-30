@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PRAW ini file containing auth details
+praw.ini
+
+# Data directory to prevent storing on Github
+data/

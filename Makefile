@@ -2,7 +2,7 @@
 project_name = reddit_analyser
 
 
-venv: .venv/.touchfile
+venv: .venv/.touchfile | data
 
 .venv/.touchfile: requirements.txt
 	python -m venv .venv
@@ -21,5 +21,8 @@ freeze: venv
 list: venv
 	source .venv/bin/activate; pip list
 
+data:
+	mkdir -p data
+
 clean:
-	rm -rf .venv
+	rm -rf .venv data/*

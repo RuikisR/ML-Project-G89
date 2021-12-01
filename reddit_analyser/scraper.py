@@ -14,7 +14,7 @@ class Scraper:
         with open("config.yaml") as f:
             self.config = yaml.safe_load(f)
         self.data = []
-        self.dictionary = []
+        self.dictionary = {}
 
     def pull_data(self):
         """
@@ -25,23 +25,24 @@ class Scraper:
             posts = self.instance.subreddit(s).hot(limit=1)
             for post in posts:
                 post.comments.replace_more(limit=None)
-                self.parse_data(post.title)
+                self.parse_data(post.title, s)
                 for comment in post.comments.list():
-                    self.parse_data(comment.body)
+                    self.parse_data(comment.body, s)
         self.pad_data()
 
-    def parse_data(self, words):
+    def parse_data(self, input_string: str, current_subreddit: str):
         """
         Function to segment our data into a usable state
         """
-        words = words.lower()
+        self.dictionary[current_subreddit] = []
+        input_string = input_string.lower()
         for c in Scraper.MEANINGLESS_CHARS:
-            words = words.replace(c, "")
-        words = words.split(" ")
+            input_string = input_string.replace(c, "")
+        words = input_string.split(" ")
         for word in words:
             if word != "" and word not in self.dictionary:
-                self.dictionary.append(word)
-        self.data.append([words.count(word) for word in self.dictionary])
+                self.dictionary[current_subreddit].append(word)
+        self.data.append([words.count(word) for word in self.dictionary[current_subreddit]])
 
     def pad_data(self):
         max_len = max([len(entry) for entry in self.data])

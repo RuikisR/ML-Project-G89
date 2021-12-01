@@ -26,7 +26,7 @@ as well as the functions defined to perform analysis on their performance
 def example_processing(data, dictionary):
     counts = [sum(data[:, i]) for i in range(len(data[0]))]
     highest = max(counts)
-    print(f"Most popular word: {dictionary[counts.index(highest)]} with {highest}")
+    print(f"Most popular word: {dictionary['ProgrammerHumor'][counts.index(highest)]} with {highest}")
 
 
 #########################################################################

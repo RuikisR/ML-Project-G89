@@ -17,6 +17,10 @@ class Scraper:
         self.dictionary = {}
         self.data_path = join(self.config["data_dir"], self.config["data_file_name"])
 
+    @property
+    def data(self):
+        return (self.x_data, self.y_data, self.dictionary)
+
     def pull_data(self):
         """
         Pulls our raw data from the Reddit API

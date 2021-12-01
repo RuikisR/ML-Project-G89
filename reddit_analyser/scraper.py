@@ -1,4 +1,5 @@
 import praw
+import yaml
 
 
 class Scraper:
@@ -10,6 +11,8 @@ class Scraper:
         Init function to instantiate our praw.reddit class and other class specific data
         """
         self.instance = praw.Reddit("scraper", user_agent="scraper user agent")
+        with open("config.yaml") as f:
+            self.config = yaml.safe_load(f)
         self.data = []
         self.dictionary = []
 
@@ -18,8 +21,7 @@ class Scraper:
         Pulls our raw data from the Reddit API
         (Will likely use a config file to control this)
         """
-        subreddits = ["ProgrammerHumor"]
-        for s in subreddits:
+        for s in self.config["subreddits"]:
             posts = self.instance.subreddit(s).hot(limit=1)
             for post in posts:
                 post.comments.replace_more(limit=None)

@@ -18,14 +18,15 @@ class Scraper:
         Pulls our raw data from the Reddit API
         (Will likely use a config file to control this)
         """
-        posts = self.instance.subreddit("ProgrammerHumor").hot(limit=10)
-        for post in posts:
-            post.comments.replace_more(limit=None)
-            self.parse_data(post.title)
-            for comment in post.comments.list():
-                self.parse_data(comment.body)
+        subreddits = ["ProgrammerHumor"]
+        for s in subreddits:
+            posts = self.instance.subreddit(s).hot(limit=1)
+            for post in posts:
+                post.comments.replace_more(limit=None)
+                self.parse_data(post.title)
+                for comment in post.comments.list():
+                    self.parse_data(comment.body)
         self.pad_data()
-        [print(len(entry)) for entry in self.data]
 
     def parse_data(self, words):
         """
@@ -36,7 +37,7 @@ class Scraper:
             words = words.replace(c, "")
         words = words.split(" ")
         for word in words:
-            if word not in self.dictionary:
+            if word != "" and word not in self.dictionary:
                 self.dictionary.append(word)
         self.data.append([words.count(word) for word in self.dictionary])
 

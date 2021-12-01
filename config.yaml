@@ -1,2 +1,7 @@
 subreddits:
   - ProgrammerHumor
+analyser_config:
+  K_val: 15
+  test_size: 0.3
+  cross_val: 5
+  L_val: 1

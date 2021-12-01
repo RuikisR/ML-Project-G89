@@ -20,13 +20,12 @@ class Scraper:
     def pull_data(self):
         """
         Pulls our raw data from the Reddit API
-        (Will likely use a config file to control this)
         """
         for s in self.config["subreddits"]:
             self.dictionary[s] = []
             self.x_data[s] = []
             self.y_data[s] = []
-            posts = self.instance.subreddit(s).hot(limit=10)
+            posts = self.instance.subreddit(s).hot(limit=3)
             for post in posts:
                 post.comments.replace_more(limit=None)
                 self.parse_data(post.title, s)

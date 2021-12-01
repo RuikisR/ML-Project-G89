@@ -1,2 +1,11 @@
 subreddits:
   - ProgrammerHumor
+
+meaningless_chars:
+  "1234567890`¬-=_+[]{};'#:@~,./<>?\\|!\"£$%^&*()"
+
+data_dir:
+  data
+
+data_file_name:
+  data.pickle

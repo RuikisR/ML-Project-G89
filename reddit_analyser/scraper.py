@@ -1,17 +1,24 @@
-import praw
-import yaml
+"""
+Module to contain Scraper class
+"""
 import pickle
 from os.path import join
+import praw
+import yaml
 
 
 class Scraper:
+    """
+    Class to handle data collection and data preparation
+    """
+
     def __init__(self):
         """
         Init function to instantiate our praw.reddit class and other class specific data
         """
         self.instance = praw.Reddit("scraper", user_agent="scraper user agent")
-        with open("config.yaml") as f:
-            self.config = yaml.safe_load(f)
+        with open("config.yaml", encoding="utf-8") as file:
+            self.config = yaml.safe_load(file)
         self.x_data = {}
         self.y_data = {}
         self.dictionary = {}
@@ -19,25 +26,28 @@ class Scraper:
 
     @property
     def data(self):
-        return (self.x_data, self.y_data, self.dictionary)
+        """
+        Property to return current scraper data
+        """
+        return self.x_data, self.y_data, self.dictionary
 
     def pull_data(self):
         """
         Pulls our raw data from the Reddit API
         """
-        for s in self.config["subreddits"]:
-            self.dictionary[s] = []
-            self.x_data[s] = []
-            self.y_data[s] = []
-            posts = self.instance.subreddit(s).hot(limit=1)
+        for subreddit in self.config["subreddits"]:
+            self.dictionary[subreddit] = []
+            self.x_data[subreddit] = []
+            self.y_data[subreddit] = []
+            posts = self.instance.subreddit(subreddit).hot(limit=1)
 
             for post in posts:
                 post.comments.replace_more(limit=None)
-                self.parse_data(post.title, s)
-                self.y_data[s].append(post.score)
+                self.parse_data(post.title, subreddit)
+                self.y_data[subreddit].append(post.score)
                 for comment in post.comments.list():
-                    self.parse_data(comment.body, s)
-                    self.y_data[s].append(comment.score)
+                    self.parse_data(comment.body, subreddit)
+                    self.y_data[subreddit].append(comment.score)
         self.pad_data()
 
     def parse_data(self, input_string: str, current_subreddit: str):
@@ -45,8 +55,8 @@ class Scraper:
         Function to segment our data into a usable state
         """
         input_string = input_string.lower()
-        for c in self.config["meaningless_chars"]:
-            input_string = input_string.replace(c, "")
+        for chars in self.config["meaningless_chars"]:
+            input_string = input_string.replace(chars, "")
         words = input_string.split(" ")
         for word in words:
             if word != "" and word not in self.dictionary[current_subreddit]:
@@ -56,9 +66,12 @@ class Scraper:
         )
 
     def pad_data(self):
-        for x in self.x_data.keys():
-            max_len = max([len(entry) for entry in self.x_data[x]])
-            for entry in self.x_data[x]:
+        """
+        Function that ensures that all data lists are off equal length
+        """
+        for curent_x in self.x_data.items():
+            max_len = max([len(entry) for entry in self.x_data[curent_x]])
+            for entry in self.x_data[curent_x]:
                 for _ in range(max_len - len(entry)):
                     entry.append(0)
 
@@ -66,12 +79,12 @@ class Scraper:
         """
         Function to pickle our data for later use
         """
-        with open(self.data_path, "wb") as f:
-            pickle.dump((self.x_data, self.y_data, self.dictionary), f)
+        with open(self.data_path, "wb") as file:
+            pickle.dump((self.x_data, self.y_data, self.dictionary), file)
 
     def load_data(self):
         """
         Unpickles data which has already been saved
         """
-        with open(self.data_path, "rb") as f:
-            return pickle.load(f)
+        with open(self.data_path, "rb") as file:
+            return pickle.load(file)

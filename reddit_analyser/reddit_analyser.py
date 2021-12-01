@@ -8,9 +8,9 @@ def get_data(use_local=True):
     """
     if not use_local:
         scraper = Scraper()
-        scraper.pull_data()
+        data = scraper.pull_data()
         scraper.dump_data()
-        return scraper.data
+        return data
     else:
         return
 
@@ -35,7 +35,7 @@ def main():
     which will process it
     """
     data = get_data(use_local=False)
-    example_processing(data)
+    # example_processing(data)
 
 
 if __name__ == "__main__":

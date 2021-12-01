@@ -3,6 +3,7 @@ Module to contain Scraper class
 """
 import pickle
 from os.path import join
+import logging
 import praw
 import yaml
 
@@ -23,6 +24,15 @@ class Scraper:
         self.y_data = {}
         self.dictionary = {}
         self.data_path = join(self.config["data_dir"], self.config["data_file_name"])
+        if self.config["debug"]:
+            logging.basicConfig(
+                level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+            )
+        else:
+            logging.basicConfig(
+                level=logging.WARNING,
+                format="%(asctime)s - %(levelname)s - %(message)s",
+            )
 
     @property
     def data(self):
@@ -69,7 +79,7 @@ class Scraper:
         """
         Function that ensures that all data lists are off equal length
         """
-        for curent_x in self.x_data.items():
+        for curent_x in self.x_data:
             max_len = max([len(entry) for entry in self.x_data[curent_x]])
             for entry in self.x_data[curent_x]:
                 for _ in range(max_len - len(entry)):

@@ -15,3 +15,5 @@ data_dir:
 
 data_file_name:
   data.pickle
+
+debug: true

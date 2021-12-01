@@ -1,7 +1,17 @@
 subreddits:
   - ProgrammerHumor
+
 analyser_config:
   K_val: 15
   test_size: 0.3
   cross_val: 5
   L_val: 1
+
+meaningless_chars:
+  "1234567890`¬-=_+[]{};'#:@~,./<>?\\|!\"£$%^&*()"
+
+data_dir:
+  data
+
+data_file_name:
+  data.pickle

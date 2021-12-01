@@ -1,11 +1,10 @@
 import praw
 import yaml
+import pickle
+from os.path import join
 
 
 class Scraper:
-
-    MEANINGLESS_CHARS = "1234567890`¬-=_+[]{};'#:@~,./<>?\\|!\"£$%^&*()"
-
     def __init__(self):
         """
         Init function to instantiate our praw.reddit class and other class specific data
@@ -16,6 +15,11 @@ class Scraper:
         self.x_data = {}
         self.y_data = {}
         self.dictionary = {}
+        self.data_path = join(self.config["data_dir"], self.config["data_file_name"])
+
+    @property
+    def data(self):
+        return (self.x_data, self.y_data, self.dictionary)
 
     def pull_data(self):
         """
@@ -25,7 +29,8 @@ class Scraper:
             self.dictionary[s] = []
             self.x_data[s] = []
             self.y_data[s] = []
-            posts = self.instance.subreddit(s).hot(limit=3)
+            posts = self.instance.subreddit(s).hot(limit=1)
+
             for post in posts:
                 post.comments.replace_more(limit=None)
                 self.parse_data(post.title, s)
@@ -40,7 +45,7 @@ class Scraper:
         Function to segment our data into a usable state
         """
         input_string = input_string.lower()
-        for c in Scraper.MEANINGLESS_CHARS:
+        for c in self.config["meaningless_chars"]:
             input_string = input_string.replace(c, "")
         words = input_string.split(" ")
         for word in words:
@@ -59,6 +64,14 @@ class Scraper:
 
     def dump_data(self):
         """
-        Function to dump our data into a csv file contained in the data directory
+        Function to pickle our data for later use
         """
-        pass
+        with open(self.data_path, "wb") as f:
+            pickle.dump((self.x_data, self.y_data, self.dictionary), f)
+
+    def load_data(self):
+        """
+        Unpickles data which has already been saved
+        """
+        with open(self.data_path, "rb") as f:
+            return pickle.load(f)

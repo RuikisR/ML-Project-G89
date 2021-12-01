@@ -42,7 +42,9 @@ class Scraper:
         for word in words:
             if word != "" and word not in self.dictionary:
                 self.dictionary[current_subreddit].append(word)
-        self.data.append([words.count(word) for word in self.dictionary[current_subreddit]])
+        self.data.append(
+            [words.count(word) for word in self.dictionary[current_subreddit]]
+        )
 
     def pad_data(self):
         max_len = max([len(entry) for entry in self.data])

@@ -63,6 +63,8 @@ class Scraper:
     def parse_data(self, input_string: str, current_subreddit: str):
         """
         Function to segment our data into a usable state
+        :param input_string: String to be correctly parsed
+        :param current_subreddit: Name of current subreddit being processed
         """
         input_string = input_string.lower()
         for chars in self.config["meaningless_chars"]:

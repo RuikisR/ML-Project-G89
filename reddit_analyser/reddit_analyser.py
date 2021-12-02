@@ -24,9 +24,11 @@ def main():
     Should only be used to pass around the data to the various functions
     which will process it
     """
-    x_data, y_data, dictionary = get_data(use_local=False)
-    data_analysis = DA()
-    data_analysis.dummy_classifier(x_data, y_data, dictionary)
+    x_data, y_data, dictionary = get_data(use_local=True)
+    for sub in x_data.keys():
+        print("Sub, #Datapoints =", sub, len(x_data[sub]))
+    # data_analysis = DA()
+    # data_analysis.dummy_classifier(x_data, y_data, dictionary)
 
 
 if __name__ == "__main__":

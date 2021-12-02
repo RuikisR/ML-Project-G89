@@ -6,6 +6,7 @@ from os.path import join
 import logging
 import praw
 import yaml
+from eta_timer import ETA_Timer
 
 
 class Scraper:
@@ -47,7 +48,10 @@ class Scraper:
         """
         Pulls our raw data from the Reddit API
         """
-        for i, subreddit in enumerate(self.config["subreddits"]):
+        num_tasks = self.submission_limit * len(self.subreddits)
+        timer = ETA_Timer(num_tasks)
+        timer.start()
+        for i, subreddit in enumerate(self.subreddits):
             logging.info(
                 "Pulling from subreddit 'r/%s' (%d of %d)",
                 subreddit,
@@ -57,32 +61,34 @@ class Scraper:
             self.dictionary[subreddit] = []
             self.x_data[subreddit] = []
             self.y_data[subreddit] = []
-            posts = self.instance.subreddit(subreddit).top(
-                "all", limit=self.submission_limit
-            )
+            posts = self.instance.subreddit(subreddit).hot(limit=self.submission_limit)
 
             for j, post in enumerate(posts):
                 logging.info(
-                    "Beginning processing for submission %d of %d",
+                    "Beginning processing for submission %d of %d; ETA %s",
                     j + 1,
                     self.submission_limit,
+                    timer.eta
                 )
                 self.parse_data(post.title, subreddit)
                 self.y_data[subreddit].append(post.score)
                 logging.info(
-                    "Expanding comments for submission %d of %d",
+                    "Expanding comments for submission %d of %d; ETA %s",
                     j + 1,
                     self.submission_limit,
+                    timer.eta
                 )
                 post.comments.replace_more(limit=None)
                 logging.info(
-                    "Parsing comments for submission %d of %d",
+                    "Parsing comments for submission %d of %d; ETA %s",
                     j + 1,
                     self.submission_limit,
+                    timer.eta
                 )
                 for comment in post.comments.list():
                     self.parse_data(comment.body, subreddit)
                     self.y_data[subreddit].append(comment.score)
+                timer.step()
         self.pad_data()
 
     def parse_data(self, input_string: str, current_subreddit: str):
@@ -102,11 +108,11 @@ class Scraper:
 
     def pad_data(self):
         """
-        Function that ensures that all data lists are off equal length
+        Function that ensures that all data lists are of equal length
         """
-        for curent_x in self.x_data:
-            max_len = max([len(entry) for entry in self.x_data[curent_x]])
-            for entry in self.x_data[curent_x]:
+        for current_x in self.x_data:
+            max_len = max([len(entry) for entry in self.x_data[current_x]])
+            for entry in self.x_data[current_x]:
                 for _ in range(max_len - len(entry)):
                     entry.append(0)
 

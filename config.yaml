@@ -12,7 +12,7 @@ analyser_config:
   dummy_strategy: "most_frequent"
 
 submission_limit:
-  1
+  50
 
 meaningless_chars:
   "1234567890`¬-=_+[]{};'#:@~,./<>?\\|!\"£$%^&*()"

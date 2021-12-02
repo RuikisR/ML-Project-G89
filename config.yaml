@@ -1,11 +1,16 @@
 subreddits:
-  - ProgrammerHumor
+  - history
+  - science
+  - politics
 
 analyser_config:
   K_val: 15
   test_size: 0.3
   cross_val: 5
   L_val: 1
+
+submission_limit:
+  1
 
 meaningless_chars:
   "1234567890`¬-=_+[]{};'#:@~,./<>?\\|!\"£$%^&*()"

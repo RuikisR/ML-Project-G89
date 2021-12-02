@@ -20,6 +20,8 @@ class Scraper:
         self.instance = praw.Reddit("scraper", user_agent="scraper user agent")
         with open("config.yaml", encoding="utf-8") as file:
             self.config = yaml.safe_load(file)
+        self.submission_limit = self.config["submission_limit"]
+        self.subreddits = self.config["subreddits"]
         self.x_data = {}
         self.y_data = {}
         self.dictionary = {}
@@ -45,16 +47,39 @@ class Scraper:
         """
         Pulls our raw data from the Reddit API
         """
-        for subreddit in self.config["subreddits"]:
+        for i, subreddit in enumerate(self.config["subreddits"]):
+            logging.info(
+                "Pulling from subreddit 'r/%s' (%d of %d)",
+                subreddit,
+                i + 1,
+                len(self.subreddits),
+            )
             self.dictionary[subreddit] = []
             self.x_data[subreddit] = []
             self.y_data[subreddit] = []
-            posts = self.instance.subreddit(subreddit).hot(limit=1)
+            posts = self.instance.subreddit(subreddit).top(
+                "all", limit=self.submission_limit
+            )
 
-            for post in posts:
-                post.comments.replace_more(limit=None)
+            for j, post in enumerate(posts):
+                logging.info(
+                    "Beginning processing for submission %d of %d",
+                    j + 1,
+                    self.submission_limit,
+                )
                 self.parse_data(post.title, subreddit)
                 self.y_data[subreddit].append(post.score)
+                logging.info(
+                    "Expanding comments for submission %d of %d",
+                    j + 1,
+                    self.submission_limit,
+                )
+                post.comments.replace_more(limit=None)
+                logging.info(
+                    "Parsing comments for submission %d of %d",
+                    j + 1,
+                    self.submission_limit,
+                )
                 for comment in post.comments.list():
                     self.parse_data(comment.body, subreddit)
                     self.y_data[subreddit].append(comment.score)

@@ -5,10 +5,11 @@ import logging
 from sklearn.linear_model import LogisticRegression, Lasso
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.metrics import RocCurveDisplay, auc, roc_curve
+from sklearn.metrics import RocCurveDisplay, auc, roc_curve, confusion_matrix
 from sklearn.dummy import DummyClassifier
 import yaml
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class DataAnalyser:
@@ -50,9 +51,23 @@ class DataAnalyser:
                 x_list, y_list, test_size=self.const["test_size"]
             )
             model.fit(x_train, y_train)
-            fpr, tpr, thresholds = roc_curve(y_test, model.predict(x_test))
+            predicted_values = model.predict(x_test)
+            logging.info("%s confusion matrix: ", repr(str(confusion_matrix(y_test, predicted_values))))
+
+            fpr, tpr, thresholds = roc_curve(y_test, predicted_values)
             score = auc(fpr, tpr)
-            logging.info("%s on subreddit %s scored: %s", model_name, subreddit, score)
+            logging.info("%s on subreddit %s got an auc score: %s", model_name, subreddit, score)
+
+            # TODO: decide what we want to do with these
+            # polynomial_features = PolynomialFeatures(degree=2)
+            # polynomial_train = polynomial_features.fit_transform(x_train)
+            # polynomial_test = polynomial_features.fit_transform(x_test)
+
+            # score = cross_val_score(model, x_test, y_test, cv=self.const["cross_val"])
+            # logging.info("%s on subreddit %s got a cross validation score: %s", model_name, subreddit, score)
+
+            RocCurveDisplay.from_estimator(model, x_test, y_test)
+            plt.show()
 
     def lasso_regression(self, x_data: dict, y_data: dict):
         """

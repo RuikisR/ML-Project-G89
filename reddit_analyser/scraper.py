@@ -49,7 +49,7 @@ class Scraper:
             self.dictionary[subreddit] = []
             self.x_data[subreddit] = []
             self.y_data[subreddit] = []
-            posts = self.instance.subreddit(subreddit).hot(limit=1)
+            posts = self.instance.subreddit(subreddit).hot(limit=3)
 
             for post in posts:
                 post.comments.replace_more(limit=None)

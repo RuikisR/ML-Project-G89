@@ -26,7 +26,7 @@ def main():
     """
     x_data, y_data, dictionary = get_data(use_local=False)
     data_analysis = DA()
-    data_analysis.temp_logistic_regression(x_data, y_data, dictionary)
+    data_analysis.dummy_classifier(x_data, y_data, dictionary)
 
 
 if __name__ == "__main__":

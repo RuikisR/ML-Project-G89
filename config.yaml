@@ -8,6 +8,8 @@ analyser_config:
   test_size: 0.3
   cross_val: 5
   L_val: 1
+  lasso_alpha: 1
+  dummy_strategy: "most_frequent"
 
 submission_limit:
   1
@@ -21,4 +23,5 @@ data_dir:
 data_file_name:
   data.pickle
 
-debug: true
+debug:
+  true

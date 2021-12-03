@@ -67,7 +67,7 @@ class Scraper:
                     "Beginning processing for submission %d of %d; ETA %s",
                     j + 1,
                     self.submission_limit,
-                    timer.eta
+                    timer.eta,
                 )
                 self.parse_data(post.title, subreddit)
                 self.y_data[subreddit].append(post.score)
@@ -75,14 +75,14 @@ class Scraper:
                     "Expanding comments for submission %d of %d; ETA %s",
                     j + 1,
                     self.submission_limit,
-                    timer.eta
+                    timer.eta,
                 )
                 post.comments.replace_more(limit=None)
                 logging.info(
                     "Parsing comments for submission %d of %d; ETA %s",
                     j + 1,
                     self.submission_limit,
-                    timer.eta
+                    timer.eta,
                 )
                 for comment in post.comments.list():
                     self.parse_data(comment.body, subreddit)

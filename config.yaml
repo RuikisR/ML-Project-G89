@@ -1,7 +1,5 @@
 subreddits:
   - history
-  - science
-  - politics
 
 analyser_config:
   K_val: 15
@@ -12,7 +10,7 @@ analyser_config:
   dummy_strategy: "most_frequent"
 
 submission_limit:
-  50
+  30
 
 meaningless_chars:
   "1234567890`¬-=_+[]{};'#:@~,./<>?\\|!\"£$%^&*()"
@@ -21,7 +19,7 @@ data_dir:
   data
 
 data_file_name:
-  data.pickle
+  big.pickle
 
 debug:
   true

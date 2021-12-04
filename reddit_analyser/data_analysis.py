@@ -120,16 +120,10 @@ class DataAnalyser:
                 )
                 logging.info(
                     "Logistic Regression with L:%s on subreddit %s got a cross validation score: %s",
-                    1,
+                    c_val,
                     subreddit,
                     score,
                 )
-                RocCurveDisplay.from_estimator(
-                    model_metrics[subreddit]["trained_model"],
-                    model_metrics[subreddit]["x_test"],
-                    model_metrics[subreddit]["y_test"],
-                )
-                plt.show()
 
     def k_neighbors(self, x_data: dict, y_data: dict) -> None:
         """
@@ -144,13 +138,6 @@ class DataAnalyser:
                 f"K Nearest Neighbours with K: {k_val}",
                 KNeighborsClassifier(n_neighbors=k_val),
             )
-            for subreddit in self.config["subreddits"]:
-                RocCurveDisplay.from_estimator(
-                    model_metrics[subreddit]["trained_model"],
-                    model_metrics[subreddit]["x_test"],
-                    model_metrics[subreddit]["y_test"],
-                )
-                plt.show()
 
     def dummy_classifier(self, x_data: dict, y_data: dict, dictionary):
         """
@@ -176,16 +163,4 @@ class DataAnalyser:
                         )
                     )
                 ),
-            )
-
-        for sub in x_data.keys():
-            x_val = np.array(x_data[sub])
-            y_val = np.array([[val] for val in y_data[sub]])
-            logging.info("%s %s", len(x_val), len(y_val))
-            counts = [sum(x_val[:, i]) for i in range(len(x_val[0]))]
-            highest = max(counts)
-            logging.info(
-                "Most popular word: '%s' with %s occurrences",
-                dictionary[sub][counts.index(highest)],
-                highest,
             )

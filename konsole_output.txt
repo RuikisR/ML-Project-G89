@@ -1,0 +1,202 @@
+Sub, #Datapoints = history 2278
+Sub, #Datapoints = science 3916
+Sub, #Datapoints = politics 20663
+2021-12-04 16:46:19,863 - INFO - Logistic Regression with L:0.001 on subreddit history got an auc score: 0.5
+2021-12-04 16:46:21,920 - INFO - Logistic Regression with L:0.001 on subreddit science got an auc score: 0.5089574155653451
+2021-12-04 16:46:55,682 - INFO - Logistic Regression with L:0.001 on subreddit politics got an auc score: 0.49923003923180026
+2021-12-04 16:46:55,694 - INFO - '[[  0 147]\n [  0 309]]' confusion matrix: 
+2021-12-04 16:46:57,427 - INFO - Logistic Regression with L:0.001 on subreddit history got a cross validation score: [0.67391304 0.67032967 0.68131868 0.68131868 0.68131868]
+2021-12-04 16:46:57,428 - INFO - '[[ 11 319]\n [  7 447]]' confusion matrix: 
+2021-12-04 16:46:59,156 - INFO - Logistic Regression with L:0.001 on subreddit science got a cross validation score: [0.57961783 0.57961783 0.58598726 0.59235669 0.58333333]
+2021-12-04 16:46:59,157 - INFO - '[[2477   16]\n [1632    8]]' confusion matrix: 
+2021-12-04 16:47:10,065 - INFO - Logistic Regression with L:0.001 on subreddit politics got a cross validation score: [0.59975816 0.60338573 0.60096735 0.60290557 0.60169492]
+2021-12-04 16:47:13,528 - INFO - Logistic Regression with L:0.01 on subreddit history got an auc score: 0.5137767637767637
+2021-12-04 16:47:16,090 - INFO - Logistic Regression with L:0.01 on subreddit science got an auc score: 0.5303912581855591
+2021-12-04 16:48:02,989 - INFO - Logistic Regression with L:0.01 on subreddit politics got an auc score: 0.5140616445429022
+2021-12-04 16:48:03,002 - INFO - '[[  6 142]\n [  4 304]]' confusion matrix: 
+2021-12-04 16:48:05,152 - INFO - Logistic Regression with L:0.01 on subreddit history got a cross validation score: [0.67391304 0.69230769 0.64835165 0.65934066 0.67032967]
+2021-12-04 16:48:05,153 - INFO - '[[ 60 287]\n [ 49 388]]' confusion matrix: 
+2021-12-04 16:48:07,398 - INFO - Logistic Regression with L:0.01 on subreddit science got a cross validation score: [0.56687898 0.58598726 0.56687898 0.57324841 0.56410256]
+2021-12-04 16:48:07,400 - INFO - '[[2354  118]\n [1535  126]]' confusion matrix: 
+2021-12-04 16:48:24,886 - INFO - Logistic Regression with L:0.01 on subreddit politics got a cross validation score: [0.5828295  0.6070133  0.58766626 0.60290557 0.59443099]
+2021-12-04 16:48:28,449 - INFO - Logistic Regression with L:0.1 on subreddit history got an auc score: 0.5095397969210613
+2021-12-04 16:48:32,539 - INFO - Logistic Regression with L:0.1 on subreddit science got an auc score: 0.5153619528619529
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+2021-12-04 16:49:28,733 - INFO - Logistic Regression with L:0.1 on subreddit politics got an auc score: 0.5453931061145489
+2021-12-04 16:49:28,747 - INFO - '[[ 16 156]\n [ 21 263]]' confusion matrix: 
+2021-12-04 16:49:31,905 - INFO - Logistic Regression with L:0.1 on subreddit history got a cross validation score: [0.58695652 0.58241758 0.56043956 0.58241758 0.65934066]
+2021-12-04 16:49:31,907 - INFO - '[[ 98 254]\n [107 325]]' confusion matrix: 
+2021-12-04 16:49:34,327 - INFO - Logistic Regression with L:0.1 on subreddit science got a cross validation score: [0.57324841 0.5477707  0.57961783 0.50955414 0.49358974]
+2021-12-04 16:49:34,329 - INFO - '[[2097  398]\n [1228  410]]' confusion matrix: 
+2021-12-04 16:50:13,199 - INFO - Logistic Regression with L:0.1 on subreddit politics got a cross validation score: [0.58887545 0.59371221 0.58041112 0.59927361 0.57627119]
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+2021-12-04 16:50:18,375 - INFO - Logistic Regression with L:0.5 on subreddit history got an auc score: 0.5321643220394954
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+2021-12-04 16:50:23,571 - INFO - Logistic Regression with L:0.5 on subreddit science got an auc score: 0.5278532608695652
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+2021-12-04 16:51:20,133 - INFO - Logistic Regression with L:0.5 on subreddit politics got an auc score: 0.5470809450873223
+2021-12-04 16:51:20,148 - INFO - '[[ 38 109]\n [ 60 249]]' confusion matrix: 
+2021-12-04 16:51:23,363 - INFO - Logistic Regression with L:0.5 on subreddit history got a cross validation score: [0.61956522 0.68131868 0.53846154 0.62637363 0.6043956 ]
+2021-12-04 16:51:23,364 - INFO - '[[124 244]\n [117 299]]' confusion matrix: 
+2021-12-04 16:51:27,326 - INFO - Logistic Regression with L:0.5 on subreddit science got a cross validation score: [0.59872611 0.52229299 0.57961783 0.51592357 0.53205128]
+2021-12-04 16:51:27,329 - INFO - '[[1965  511]\n [1159  498]]' confusion matrix: 
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+2021-12-04 16:52:11,401 - INFO - Logistic Regression with L:0.5 on subreddit politics got a cross validation score: [0.55018138 0.57678356 0.55380895 0.60048426 0.56053269]
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+2021-12-04 16:52:16,643 - INFO - Logistic Regression with L:1 on subreddit history got an auc score: 0.579135162687962
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+2021-12-04 16:52:22,003 - INFO - Logistic Regression with L:1 on subreddit science got an auc score: 0.5327602429219057
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+2021-12-04 16:53:16,294 - INFO - Logistic Regression with L:1 on subreddit politics got an auc score: 0.5453801322608212
+2021-12-04 16:53:16,311 - INFO - '[[ 60  98]\n [ 66 232]]' confusion matrix: 
+2021-12-04 16:53:20,002 - INFO - Logistic Regression with L:1 on subreddit history got a cross validation score: [0.56521739 0.6043956  0.6043956  0.67032967 0.65934066]
+2021-12-04 16:53:20,003 - INFO - '[[130 221]\n [132 301]]' confusion matrix: 
+2021-12-04 16:53:24,167 - INFO - Logistic Regression with L:1 on subreddit science got a cross validation score: [0.52866242 0.56687898 0.59235669 0.52229299 0.57692308]
+2021-12-04 16:53:24,168 - INFO - '[[1879  622]\n [1078  554]]' confusion matrix: 
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/raivo/Storage/College/machine_learning/ML-Project-G89/.venv/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:814: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+2021-12-04 16:54:07,590 - INFO - Logistic Regression with L:1 on subreddit politics got a cross validation score: [0.55743652 0.56952842 0.57799274 0.60653753 0.57627119]
+2021-12-04 16:54:08,940 - INFO - Lasso Regression on subreddit history got an auc score: 0.5
+2021-12-04 16:54:10,870 - INFO - Lasso Regression on subreddit science got an auc score: 0.5
+2021-12-04 16:54:39,091 - INFO - Lasso Regression on subreddit politics got an auc score: 0.5
+2021-12-04 16:54:39,103 - INFO - history coefficient [-0. -0. -0. ... -0. -0. -0.] intercept 0.3957047791893527
+2021-12-04 16:54:39,103 - INFO - science coefficient [-0. -0. -0. ... -0. -0. -0.] intercept 0.3957047791893527
+2021-12-04 16:54:39,103 - INFO - politics coefficient [-0. -0. -0. ... -0. -0. -0.] intercept 0.3957047791893527
+2021-12-04 16:54:40,495 - INFO - K Nearest Neighbours with K: 5 on subreddit history got an auc score: 0.48097757621567144
+2021-12-04 16:54:42,344 - INFO - K Nearest Neighbours with K: 5 on subreddit science got an auc score: 0.5007399577167019
+2021-12-04 16:55:15,714 - INFO - K Nearest Neighbours with K: 5 on subreddit politics got an auc score: 0.5151369051544813
+2021-12-04 16:55:17,049 - INFO - K Nearest Neighbours with K: 11 on subreddit history got an auc score: 0.5008659258190216
+2021-12-04 16:55:18,939 - INFO - K Nearest Neighbours with K: 11 on subreddit science got an auc score: 0.5446127946127947
+2021-12-04 16:55:54,519 - INFO - K Nearest Neighbours with K: 11 on subreddit politics got an auc score: 0.5042123665807876
+2021-12-04 16:55:55,972 - INFO - K Nearest Neighbours with K: 17 on subreddit history got an auc score: 0.4884967320261438
+2021-12-04 16:55:57,895 - INFO - K Nearest Neighbours with K: 17 on subreddit science got an auc score: 0.4935378785360503
+2021-12-04 16:56:32,650 - INFO - K Nearest Neighbours with K: 17 on subreddit politics got an auc score: 0.5032573652297787
+2021-12-04 16:56:34,049 - INFO - K Nearest Neighbours with K: 23 on subreddit history got an auc score: 0.5413832199546484
+2021-12-04 16:56:35,935 - INFO - K Nearest Neighbours with K: 23 on subreddit science got an auc score: 0.48728085024462464
+2021-12-04 16:57:09,645 - INFO - K Nearest Neighbours with K: 23 on subreddit politics got an auc score: 0.5068249230659668

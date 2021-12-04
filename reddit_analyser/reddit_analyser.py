@@ -24,7 +24,7 @@ def main():
     Should only be used to pass around the data to the various functions
     which will process it
     """
-    x_data, y_data, dictionary = get_data(use_local=False)
+    x_data, y_data, dictionary = get_data(use_local=True)
     for sub in x_data.keys():
         print("Sub, #Datapoints =", sub, len(x_data[sub]))
     data_analysis = DA()

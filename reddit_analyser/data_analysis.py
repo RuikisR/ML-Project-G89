@@ -43,10 +43,8 @@ class DataAnalyser:
         for subreddit in self.config["subreddits"]:
             x_list = np.array(x_data[subreddit])
             y_list = np.array(y_data[subreddit])
-            # TODO ARBITRARY
-            arbitrary_choice = 5
             for y_val in range(len(y_list)):
-                if y_list[y_val] < arbitrary_choice:
+                if y_list[y_val] < self.const["positive_reaction"]:
                     y_list[y_val] = 0
                 else:
                     y_list[y_val] = 1
@@ -61,11 +59,6 @@ class DataAnalyser:
             logging.info(
                 "%s on subreddit %s got an auc score: %s", model_name, subreddit, score
             )
-
-            # TODO: decide what we want to do with these
-            # polynomial_features = PolynomialFeatures(degree=2)
-            # polynomial_train = polynomial_features.fit_transform(x_train)
-            # polynomial_test = polynomial_features.fit_transform(x_test)
 
             metrics[subreddit] = {
                 "x_test": x_test,
@@ -87,9 +80,10 @@ class DataAnalyser:
         )
         for subreddit in self.config["subreddits"]:
             logging.info(
-                "Lasso Regression on subreddit %s got an auc score: %s",
+                "%s coefficient %s intercept %s",
                 subreddit,
-                model_metrics[subreddit]["score"],
+                model_metrics[subreddit]["trained_model"].coef_,
+                model_metrics[subreddit]["trained_model"].intercept_,
             )
 
     def logistic_regression(self, x_data: dict, y_data: dict) -> None:
@@ -98,45 +92,44 @@ class DataAnalyser:
         :param x_data: dictionary containing the x_values indexed by subreddit name
         :param y_data: dictionary containing the y_values indexed by subreddit name
         """
-        # c_values = [0.001, 0.01, 0.1, 0.5, 1]
-        # for c_val in c_values:
-        model_metrics = self.model_execution(
-            x_data,
-            y_data,
-            f"Logistic Regression with L:{1}",
-            LogisticRegression(C=1),
-        )
+        for c_val in self.const["C_vals"]:
+            model_metrics = self.model_execution(
+                x_data,
+                y_data,
+                f"Logistic Regression with L:{c_val}",
+                LogisticRegression(C=c_val),
+            )
 
-        for subreddit in self.config["subreddits"]:
-            logging.info(
-                "%s confusion matrix: ",
-                repr(
-                    str(
-                        confusion_matrix(
-                            model_metrics[subreddit]["y_test"],
-                            model_metrics[subreddit]["predicted_values"],
+            for subreddit in self.config["subreddits"]:
+                logging.info(
+                    "%s confusion matrix: ",
+                    repr(
+                        str(
+                            confusion_matrix(
+                                model_metrics[subreddit]["y_test"],
+                                model_metrics[subreddit]["predicted_values"],
+                            )
                         )
-                    )
-                ),
-            )
-            score = cross_val_score(
-                model_metrics[subreddit]["trained_model"],
-                model_metrics[subreddit]["x_test"],
-                model_metrics[subreddit]["y_test"],
-                cv=self.const["cross_val"],
-            )
-            logging.info(
-                "Logistic Regression with L:%s on subreddit %s got a cross validation score: %s",
-                1,
-                subreddit,
-                score,
-            )
-            RocCurveDisplay.from_estimator(
-                model_metrics[subreddit]["trained_model"],
-                model_metrics[subreddit]["x_test"],
-                model_metrics[subreddit]["y_test"],
-            )
-            plt.show()
+                    ),
+                )
+                score = cross_val_score(
+                    model_metrics[subreddit]["trained_model"],
+                    model_metrics[subreddit]["x_test"],
+                    model_metrics[subreddit]["y_test"],
+                    cv=self.const["cross_val"],
+                )
+                logging.info(
+                    "Logistic Regression with L:%s on subreddit %s got a cross validation score: %s",
+                    1,
+                    subreddit,
+                    score,
+                )
+                RocCurveDisplay.from_estimator(
+                    model_metrics[subreddit]["trained_model"],
+                    model_metrics[subreddit]["x_test"],
+                    model_metrics[subreddit]["y_test"],
+                )
+                plt.show()
 
     def k_neighbors(self, x_data: dict, y_data: dict) -> None:
         """
@@ -144,32 +137,20 @@ class DataAnalyser:
         :param x_data: dictionary containing the x_values indexed by subreddit name
         :param y_data: dictionary containing the y_values indexed by subreddit name
         """
-        #k_values = [self.const["K_val"], 11, 17, 23]
-        #for k_val in k_values:
-        model_metrics = self.model_execution(
-            x_data,
-            y_data,
-            f"K Nearest Neighbours with K: {self.const['K_val']}",
-            KNeighborsClassifier(n_neighbors=self.const["K_val"]),
-        )
-        for subreddit in self.config["subreddits"]:
-            logging.info(
-                "%s confusion matrix: %s",
-                subreddit,
-                repr(
-                    str(
-                        confusion_matrix(
-                            model_metrics[subreddit]["y_test"], model_metrics[subreddit]["predicted_values"]
-                        )
-                    )
+        for k_val in self.const["K_vals"]:
+            model_metrics = self.model_execution(
+                x_data,
+                y_data,
+                f"K Nearest Neighbours with K: {k_val}",
+                KNeighborsClassifier(n_neighbors=k_val),
+            )
+            for subreddit in self.config["subreddits"]:
+                RocCurveDisplay.from_estimator(
+                    model_metrics[subreddit]["trained_model"],
+                    model_metrics[subreddit]["x_test"],
+                    model_metrics[subreddit]["y_test"],
                 )
-            )
-            RocCurveDisplay.from_estimator(
-                model_metrics[subreddit]["trained_model"],
-                model_metrics[subreddit]["x_test"],
-                model_metrics[subreddit]["y_test"],
-            )
-            plt.show()
+                plt.show()
 
     def dummy_classifier(self, x_data: dict, y_data: dict, dictionary):
         """
@@ -194,7 +175,7 @@ class DataAnalyser:
                             model_metrics["y_test"], model_metrics["predicted_values"]
                         )
                     )
-                )
+                ),
             )
 
         for sub in x_data.keys():

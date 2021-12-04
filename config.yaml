@@ -2,15 +2,16 @@ subreddits:
   - history
 
 analyser_config:
-  K_val: 15
+  K_vals: 15
   test_size: 0.3
-  cross_val: 5
-  L_val: 1
+  cross_val: [5, 11, 17, 23]
+  C_vals: [0.001, 0.01, 0.1, 0.5, 1]
   lasso_alpha: 1
+  positive_reaction: 2
   dummy_strategy: "most_frequent"
 
 submission_limit:
-  30
+  50
 
 meaningless_chars:
   "1234567890`¬-=_+[]{};'#:@~,./<>?\\|!\"£$%^&*()"
